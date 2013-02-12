@@ -66,6 +66,12 @@
     ok(Model.create({cid: model.cid}) !== model);
   });
 
+  test('Model creation doesn\'t set the model collection as the all collection.', function() {
+    var Model = Supermodel.Model.extend();
+    var model = Model.create();
+    ok(model.collection === undefined);
+  });
+
   test('Use cidAttribute to identify attributes.', function() {
     var Model = Supermodel.Model.extend({cidAttribute: '_cid'});
     var model = Model.create();

@@ -443,7 +443,11 @@
 
       // Add the model to `all` for each constructor in its prototype chain.
       var ctor = this.constructor;
-      do { ctor.all().add(this); } while (ctor = ctor.parent);
+      do {
+          var collection = this.collection;
+          ctor.all().add(this);
+          this.collection = collection;
+      } while (ctor = ctor.parent);
 
       // Trigger 'initialize' for listening associations.
       this.trigger('initialize', this);
